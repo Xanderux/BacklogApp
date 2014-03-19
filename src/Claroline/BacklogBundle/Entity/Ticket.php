@@ -65,7 +65,21 @@ class Ticket
 
     // m to o
     private $creator;
+
+    /**
+     * @ORM\ManyToOne(
+     *     targetEntity="Claroline\BacklogBundle\Entity\Status",
+     *     inversedBy="tickets"
+     * )
+     */
     private $status;
+
+    /**
+     * @ORM\ManyToOne(
+     *     targetEntity="Claroline\BacklogBundle\Entity\Version",
+     *     inversedBy="tickets"
+     * )
+     */
     private $version;
 
     /**
