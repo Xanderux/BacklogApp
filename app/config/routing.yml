@@ -1,0 +1,2 @@
+claro_backlog:
+    resource: "@ClarolineBacklogBundle/Resources/config/routing.yml"
