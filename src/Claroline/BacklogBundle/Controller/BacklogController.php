@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class BacklogController extends Controller
 {
     /**
-     * @Route("/", name="_demo")
+     * @Route("/", name="index")
      * @Template()
      */
     public function indexAction()
