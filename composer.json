@@ -1,8 +1,5 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "license": "MIT",
-    "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "name": "claroline/backlog-app",
     "autoload": {
         "psr-0": { "": "src/" }
     },
@@ -20,7 +17,9 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "pagerfanta/pagerfanta": "dev-master"
+        "pagerfanta/pagerfanta": "dev-master",
+        "doctrine/migrations": "dev-master",
+        "doctrine/doctrine-migrations-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
