@@ -61,9 +61,12 @@ class Ticket
      */
     private $githubLink;
 
-
-
-    // m to o
+    /**
+     * @ORM\ManyToOne(
+     *     targetEntity="Claroline\BacklogBundle\Entity\User",
+     *     inversedBy="tickets"
+     * )
+     */
     private $creator;
 
     /**
@@ -90,16 +93,45 @@ class Ticket
      */
     private $comments;
 
-
-    // m to m
+    /**
+     * @ORM\ManyToMany(
+     *     targetEntity="Claroline\BacklogBundle\Entity\Team",
+     *     inversedBy="tickets"
+     * )
+     */
     private $teams;
+
+    /**
+     * @ORM\ManyToMany(
+     *     targetEntity="Claroline\BacklogBundle\Entity\Role",
+     *     inversedBy="tickets"
+     * )
+     */
     private $roles;
+
+    /**
+     * @ORM\ManyToMany(
+     *     targetEntity="Claroline\BacklogBundle\Entity\Category",
+     *     inversedBy="tickets"
+     * )
+     */
     private $categories;
+
+    /**
+     * @ORM\ManyToMany(
+     *     targetEntity="Claroline\BacklogBundle\Entity\Package",
+     *     inversedBy="tickets"
+     * )
+     */
     private $packages;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->teams = new ArrayCollection();
+        $this->roles = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->packages = new ArrayCollection();
     }
 
     /**

@@ -11,7 +11,30 @@
 
 namespace Claroline\BacklogBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ */
 class Category
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
 
+    /**
+     * @ORM\Column()
+     */
+    private $name;
+
+    /**
+     * @ORM\ManyToMany(
+     *     targetEntity="Claroline\BacklogBundle\Entity\Ticket",
+     *     mappedBy="categories"
+     * )
+     */
+    private $tickets;
 }

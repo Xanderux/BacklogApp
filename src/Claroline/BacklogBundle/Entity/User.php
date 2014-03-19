@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  */
-class Package
+class User
 {
     /**
      * @ORM\Id
@@ -26,14 +26,9 @@ class Package
     private $id;
 
     /**
-     * @ORM\Column()
-     */
-    private $name;
-
-    /**
-     * @ORM\ManyToMany(
+     * @ORM\OneToMany(
      *     targetEntity="Claroline\BacklogBundle\Entity\Ticket",
-     *     mappedBy="packages"
+     *     mappedBy="creator"
      * )
      */
     private $tickets;
