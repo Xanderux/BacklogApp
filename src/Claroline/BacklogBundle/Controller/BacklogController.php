@@ -4,6 +4,7 @@ namespace Claroline\BacklogBundle\Controller;
 
 use Claroline\BacklogBundle\Entity\Ticket;
 use Claroline\BacklogBundle\Entity\Status;
+use Claroline\BacklogBundle\Form\TicketType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as EXT;
@@ -29,14 +30,7 @@ class BacklogController extends Controller
      */
     public function createTicketAction(Request $request)
     {
-        $form = $this->createFormBuilder(new Ticket())
-            ->add('title', 'text', array('max_length' => 80, 'required' => true, 'label' => 'Sujet'))
-            ->add('description', 'textarea', array('required' => false, 'label' => 'Description'))
-            ->add('time', 'text', array('max_length' => 80, 'required' => false, 'label' => 'Temps'))
-            ->add('path', 'text', array('max_length' => 80, 'required' => false, 'label' => 'Chemin'))
-            ->add('status', 'collection', array('options' => array('data_class' => 'Claroline\BacklogBundle\Entity\Status')))
-            ->add('save', 'submit')
-            ->getForm();
+        $form = $this->createForm(new TicketType(), new Ticket());
 
         if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
@@ -63,10 +57,7 @@ class BacklogController extends Controller
      */
     public function updateTicketAction(Request $request, Ticket $ticket)
     {
-        $form = $this->createFormBuilder($ticket)
-            ->add('title', 'text')
-            ->add('save', 'submit')
-            ->getForm();
+        $form = $this->createForm(new TicketType(), $ticket);
 
         if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);

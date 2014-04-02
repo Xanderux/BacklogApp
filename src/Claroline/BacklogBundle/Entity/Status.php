@@ -31,21 +31,18 @@ class Status
      */
     private $statusName;
 
-
     /**
      * @ORM\OneToMany(
      *     targetEntity="Claroline\BacklogBundle\Entity\Ticket",
      *     mappedBy="status"
      * )
      */
-
     private $tickets;
 
-
     public function __construct()
-      {
+    {
         $this->tickets = new ArrayCollection();
-      }
+    }
 
     /**
      * @param mixed $statusName
@@ -62,5 +59,4 @@ class Status
     {
         return $this->statusName;
     }
-
 }
