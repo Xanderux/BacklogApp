@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
+{% extends '::base.html.twig' %}
 
-<title>Claroline Connect Backlog</title>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-</head>
-<body>
+{% block body %}
 <h1>Liste des Tickets</h1>
 
 <table class="table">
@@ -37,5 +31,4 @@
 </table>
 
 <a href="{{ path('create_ticket') }}">Create</a>
-</body>
-</html>
+{% endblock %}

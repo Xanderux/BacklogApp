@@ -1,4 +1,7 @@
-Tickets:
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<h1> Status </h1>
 
 <table>
     <thead>
@@ -18,3 +21,5 @@ Tickets:
 </table>
 
 <a href="{{ path('new_status_form') }}">Create</a>
+
+{%endblock%}
