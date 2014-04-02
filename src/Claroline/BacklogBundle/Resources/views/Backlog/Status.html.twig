@@ -1,0 +1,20 @@
+Tickets:
+
+<table>
+    <thead>
+        <th>
+            <tr>
+                <td>Status</td>
+            </tr>
+        </th>
+    </thead>
+    <tbody>
+        {% for statu in status %}
+            <tr>
+                <td>{{ statu.getStatus() }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('new_status_form') }}">Create</a>
