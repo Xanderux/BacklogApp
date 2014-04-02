@@ -25,7 +25,7 @@
             <tr>
                 <td>{{ ticket.getTitle() }}</td>
                 <td>{{ ticket.getCreator().getUsername() }}</td>
-                {#<td>{{ ticket.getStatus().getStatusName() }}</td>#}
+                <td>{{ ticket.getStatus().getStatus() }}</td>
                 <td>
                     <a href="{{ path('update_ticket', { ticket: ticket.getId() }) }}">
                         Update
