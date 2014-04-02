@@ -4,7 +4,10 @@ namespace Claroline\BacklogBundle\Controller;
 
 use Claroline\BacklogBundle\Entity\Ticket;
 use Claroline\BacklogBundle\Entity\Status;
+use Claroline\BacklogBundle\Entity\Version;
 use Claroline\BacklogBundle\Form\TicketType;
+use Claroline\BacklogBundle\Form\StatusType;
+use Claroline\BacklogBundle\Form\VersionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as EXT;
@@ -89,22 +92,19 @@ class BacklogController extends Controller
     }
 
     /**
-     * @EXT\Route("/status/new", name="new_status_form")
-     * @EXT\Template
+     * @EXT\Route("/status/new", name="create_status")
+     * @EXT\Template'("ClarolineBacklogBundle:Backlog:statusForm.html.twig")
      */
     public function statusFormAction(Request $request)
     {
-        $form = $this->createFormBuilder()
-            ->add('statusName', 'text', array('max_length' => 80, 'required' => true, 'label' => 'Status'))
-            ->add('save', 'submit')
-            ->getForm();
+        $form = $this->createForm(new StatusType(), new Status());
 
         if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
                 $status = new Status();
-                $status->setStatus($form->get('statusName')->getData());
+                $status->setStatusName($form->get('statusName')->getData());
                 $em = $this->get('doctrine.orm.entity_manager');
                 $em->persist($status);
                 $em->flush();
@@ -115,4 +115,43 @@ class BacklogController extends Controller
 
         return array('form' => $form->createView());
     }
+
+    /**
+     * @EXT\Route("/version", name="version")
+     * @EXT\Template
+     */
+    public function versionAction()
+    {
+        $version = $this->get('doctrine.orm.entity_manager')
+            ->getRepository('ClarolineBacklogBundle:Version')
+            ->findAll();
+
+        return array('versions' => $version);
+    }
+
+    /**
+     * @EXT\Route("/version/new", name="create_version")
+     * @EXT\Template
+     */
+    public function versionFormAction(Request $request)
+    {
+        $form = $this->createForm(new VersionType(), new Version());
+
+        if ($request->getMethod() === 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $version = new Version();
+                $version->setVersionName($form->get('versionName')->getData());
+                $em = $this->get('doctrine.orm.entity_manager');
+                $em->persist($version);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('version'));
+            }
+        }
+
+        return array('form' => $form->createView());
+    }
+
 }

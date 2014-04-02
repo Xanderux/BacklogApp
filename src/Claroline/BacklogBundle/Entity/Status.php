@@ -47,7 +47,7 @@ class Status
     /**
      * @param mixed $statusName
      */
-    public function setStatus($statusName)
+    public function setStatusName($statusName)
     {
         $this->statusName = $statusName;
     }
@@ -55,7 +55,7 @@ class Status
     /**
      * @return mixed
      */
-    public function getStatus()
+    public function getStatusName()
     {
         return $this->statusName;
     }

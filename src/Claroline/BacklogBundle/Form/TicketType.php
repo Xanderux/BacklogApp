@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Claroline Connect package.
- *
- * (c) Claroline Consortium <consortium@claroline.net>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Claroline\BacklogBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -29,8 +20,18 @@ class TicketType extends AbstractType
                 'entity',
                 array(
                     'class' => 'Claroline\BacklogBundle\Entity\Status',
-                    'property' => 'status',
+                    'property' => 'statusName',
                     'query_builder' => function ($repository) { return $repository->createQueryBuilder('p')->orderBy('p.statusName', 'ASC'); }
+
+                )
+            )
+            ->add(
+                'version',
+                'entity',
+                array(
+                    'class' => 'Claroline\BacklogBundle\Entity\Version',
+                    'property' => 'versionName',
+                    'query_builder' => function ($repository) { return $repository->createQueryBuilder('p')->orderBy('p.versionName', 'ASC'); }
 
                 )
             )

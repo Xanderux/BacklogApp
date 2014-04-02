@@ -12,6 +12,7 @@
 namespace Claroline\BacklogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -44,4 +45,19 @@ class Version
         $this->tickets = new ArrayCollection();
       }
 
+    /**
+     * @param mixed $versionName
+     */
+    public function setVersionName($versionName)
+    {
+        $this->versionName = $versionName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVersionName()
+    {
+        return $this->versionName;
+    }
 }

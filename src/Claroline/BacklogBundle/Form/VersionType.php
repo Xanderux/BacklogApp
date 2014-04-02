@@ -6,12 +6,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class StatusType extends AbstractType
+class VersionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('statusName', 'text', array('max_length' => 80, 'required' => true, 'label' => 'Status'))
+            ->add('versionName', 'text', array('max_length' => 80, 'required' => true, 'label' => 'Version'))
             ->add('save', 'submit');
     }
 
@@ -19,13 +19,13 @@ class StatusType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Claroline\BacklogBundle\Entity\Status',
+                'data_class' => 'Claroline\BacklogBundle\Entity\Version',
             )
         );
     }
 
     public function getName()
     {
-        return 'status';
+        return 'version';
     }
 }

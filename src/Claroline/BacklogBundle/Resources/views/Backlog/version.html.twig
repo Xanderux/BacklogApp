@@ -1,23 +1,23 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<h1> Status </h1>
+<h1> Versions </h1>
 
 <table class="table table-striped">
     <thead>
             <tr>
-                <th>Status</th>
+                <th>Version</th>
             </tr>
     </thead>
     <tbody>
-        {% for statu in status %}
+        {% for version in versions %}
             <tr>
-                <td>{{ statu.getStatusName() }}</td>
+                <td>{{ version.getVersionName() }}</td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
 
-<a href="{{ path('create_status') }}">Create</a>
+<a href="{{ path('create_version') }}">Create</a>
 
 {%endblock%}

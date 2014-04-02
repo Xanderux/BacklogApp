@@ -3,23 +3,24 @@
 {% block body %}
 <h1>Liste des Tickets</h1>
 
-<table class="table">
+<table class="table table-striped">
     <thead>
-        <th>
-            <tr>
-                <td>Title</td>
-                <td>Creator</td>
-                <td>Status</td>
-                <td>Update</td>
-            </tr>
-        </th>
+       <tr>
+                <th>Title</th>
+                <th>Creator</th>
+                <th>Status</th>
+                <th>Version</th>
+                <th>Update</th>
+
+       </tr>
     </thead>
     <tbody>
         {% for ticket in tickets %}
             <tr>
                 <td>{{ ticket.getTitle() }}</td>
                 <td>{{ ticket.getCreator().getUsername() }}</td>
-                <td>{{ ticket.getStatus().getStatus() }}</td>
+                <td>{{ ticket.getStatus().getStatusName() }}</td>
+                <td>{{ ticket.getVersion().getVersionName() }}</td>
                 <td>
                     <a href="{{ path('update_ticket', { ticket: ticket.getId() }) }}">
                         Update
