@@ -37,12 +37,12 @@ class Ticket
     private $description;
 
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      */
     private $time;
 
     /**
-     * @ORM\Column()
+     * @ORM\Column(nullable=true)
      */
     private $path;
 
