@@ -1,16 +1,28 @@
 Tickets:
 
 <table>
-    <th>
-        <td>Title</td>
-        <td>Creator</td>
-    </th>
-    {% for ticket in tickets %}
-        <tr>
-            <td>{{ ticket.getTitle() }}</td>
-            <td>{{ ticket.getCreator().getUsername() }}</td>
-        </tr>
-    {% endfor %}
+    <thead>
+        <th>
+            <tr>
+                <td>Title</td>
+                <td>Creator</td>
+                <td>Update</td>
+            </tr>
+        </th>
+    </thead>
+    <tbody>
+        {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket.getTitle() }}</td>
+                <td>{{ ticket.getCreator().getUsername() }}</td>
+                <td>
+                    <a href="{{ path('update_ticket', { ticket: ticket.getId() }) }}">
+                        Update
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
 </table>
 
-<a href="{{ path('new_ticket_form') }}">Create</a>
+<a href="{{ path('create_ticket') }}">Create</a>
