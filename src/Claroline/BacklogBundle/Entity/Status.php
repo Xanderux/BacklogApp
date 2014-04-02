@@ -12,6 +12,7 @@
 namespace Claroline\BacklogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -45,4 +46,21 @@ class Status
       {
         $this->tickets = new ArrayCollection();
       }
+
+    /**
+     * @param mixed $statusName
+     */
+    public function setStatus($statusName)
+    {
+        $this->statusName = $statusName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->statusName;
+    }
+
 }
