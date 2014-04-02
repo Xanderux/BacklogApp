@@ -74,6 +74,20 @@ class BacklogController extends Controller
         return array('form' => $form->createView());
     }
 
+
+    /**
+     * @EXT\Route("/status", name="status")
+     * @EXT\Template
+     */
+    public function StatusAction()
+    {
+        $status = $this->get('doctrine.orm.entity_manager')
+            ->getRepository('ClarolineBacklogBundle:Status')
+            ->findAll();
+
+        return array('status' => $status);
+    }
+
     /**
      * @EXT\Route("/status/new", name="new_status_form")
      * @EXT\Template
@@ -95,7 +109,7 @@ class BacklogController extends Controller
                 $em->persist($status);
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('tickets'));
+                return $this->redirect($this->generateUrl('status'));
             }
         }
 
