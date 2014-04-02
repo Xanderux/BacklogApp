@@ -1,7 +1,16 @@
 Tickets:
 
-{% for ticket in tickets %}
-    <li>{{ ticket.getTitle() }}
-{% endfor %}
+<table>
+    <th>
+        <td>Title</td>
+        <td>Creator</td>
+    </th>
+    {% for ticket in tickets %}
+        <tr>
+            <td>{{ ticket.getTitle() }}</td>
+            <td>{{ ticket.getCreator().getUsername() }}</td>
+        </tr>
+    {% endfor %}
+</table>
 
 <a href="{{ path('new_ticket_form') }}">Create</a>

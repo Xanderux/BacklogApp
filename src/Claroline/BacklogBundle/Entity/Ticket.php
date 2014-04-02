@@ -66,6 +66,7 @@ class Ticket
      *     targetEntity="Claroline\BacklogBundle\Entity\User",
      *     inversedBy="tickets"
      * )
+     * @ORM\JoinColumn(nullable=false)
      */
     private $creator;
 
@@ -292,5 +293,15 @@ class Ticket
     public function getGithubLink()
     {
         return $this->githubLink;
+    }
+
+    public function setCreator(User $creator)
+    {
+        $this->creator = $creator;
+    }
+
+    public function getCreator()
+    {
+        return $this->creator;
     }
 }

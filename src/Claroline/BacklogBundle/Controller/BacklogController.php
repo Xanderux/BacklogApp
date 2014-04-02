@@ -39,6 +39,7 @@ class BacklogController extends Controller
             if ($form->isValid()) {
                 $ticket = new Ticket();
                 $ticket->setTitle($form->get('title')->getData());
+                $ticket->setCreator($this->getUser());
                 $em = $this->get('doctrine.orm.entity_manager');
                 $em->persist($ticket);
                 $em->flush();
