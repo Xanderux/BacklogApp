@@ -2,6 +2,7 @@
 
 namespace Claroline\BacklogBundle\Controller;
 
+use Claroline\BacklogBundle\Entity\Ticket;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as EXT;
@@ -23,11 +24,29 @@ class BacklogController extends Controller
 
     /**
      * @EXT\Route("/tickets/new", name="new_ticket_form")
-     * @EXT\Method("GET")
      * @EXT\Template
      */
-    public function ticketFormAction()
+    public function ticketFormAction(Request $request)
     {
-        return array();
+        $form = $this->createFormBuilder()
+            ->add('title', 'text')
+            ->add('save', 'submit')
+            ->getForm();
+
+        if ($request->getMethod() === 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $ticket = new Ticket();
+                $ticket->setTitle($form->get('title')->getData());
+                $em = $this->get('doctrine.orm.entity_manager');
+                $em->persist($ticket);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('tickets'));
+            }
+        }
+
+        return array('form' => $form->createView());
     }
 }
