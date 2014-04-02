@@ -79,7 +79,7 @@ class BacklogController extends Controller
      * @EXT\Route("/status", name="status")
      * @EXT\Template
      */
-    public function StatusAction()
+    public function statusAction()
     {
         $status = $this->get('doctrine.orm.entity_manager')
             ->getRepository('ClarolineBacklogBundle:Status')
