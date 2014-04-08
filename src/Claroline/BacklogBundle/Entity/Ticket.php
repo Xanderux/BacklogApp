@@ -215,6 +215,54 @@ class Ticket
         return $this->categories;
     }
 
+    /**
+     * @param mixed $package
+     */
+    public function setPackage($package)
+    {
+        $this->packages = $package;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPackage()
+    {
+        return $this->packages;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role)
+    {
+        $this->roles = $role;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param mixed $team
+     */
+    public function setTeam($team)
+    {
+        $this->teams = $team;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTeam()
+    {
+        return $this->teams;
+    }
+
 
     /**
      * @param mixed $path

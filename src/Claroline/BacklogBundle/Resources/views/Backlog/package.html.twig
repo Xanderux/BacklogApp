@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<h1> Packages </h1>
+
+<table class="table table-striped">
+    <thead>
+            <tr>
+                <th>Package</th>
+            </tr>
+    </thead>
+    <tbody>
+        {% for package in packages %}
+            <tr>
+                <td>{{ package.getName() }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('create_package') }}">Create</a>
+
+{%endblock%}

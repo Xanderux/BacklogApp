@@ -12,6 +12,7 @@
 namespace Claroline\BacklogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -37,4 +38,26 @@ class Role
      * )
      */
     private $tickets;
+
+    public function __construct()
+    {
+        $this->tickets = new ArrayCollection();
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
 }

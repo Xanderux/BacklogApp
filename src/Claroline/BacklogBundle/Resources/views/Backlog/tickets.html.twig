@@ -11,6 +11,9 @@
                 <th>Status</th>
                 <th>Version</th>
                 <th>Catégorie(s)</th>
+                <th>Package(s)</th>
+                <th>Role(s)</th>
+                <th>Team(s)</th>
                 <th>Update</th>
 
        </tr>
@@ -23,6 +26,9 @@
                 <td>{{ ticket.getStatus().getStatusName() }}</td>
                 <td>{{ ticket.getVersion().getVersionName() }}</td>
                 <td>{% for category in ticket.getCategory() %} {{category.getName()}},  {%endfor%}</td>
+                <td>{% for package in ticket.getPackage() %} {{package.getName()}},  {%endfor%}</td>
+                <td>{% for role in ticket.getRole() %} {{role.getName()}},  {%endfor%}</td>
+                <td>{% for team in ticket.getTeam() %} {{team.getName()}},  {%endfor%}</td>
                 <td>
                     <a href="{{ path('update_ticket', { ticket: ticket.getId() }) }}">
                         Update
