@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<h1> Categories </h1>
+
+<table class="table table-striped">
+    <thead>
+            <tr>
+                <th>Category</th>
+            </tr>
+    </thead>
+    <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.getName() }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('create_category') }}">Create</a>
+
+{%endblock%}

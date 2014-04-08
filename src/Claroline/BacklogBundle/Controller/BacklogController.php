@@ -5,9 +5,11 @@ namespace Claroline\BacklogBundle\Controller;
 use Claroline\BacklogBundle\Entity\Ticket;
 use Claroline\BacklogBundle\Entity\Status;
 use Claroline\BacklogBundle\Entity\Version;
+use Claroline\BacklogBundle\Entity\Category;
 use Claroline\BacklogBundle\Form\TicketType;
 use Claroline\BacklogBundle\Form\StatusType;
 use Claroline\BacklogBundle\Form\VersionType;
+use Claroline\BacklogBundle\Form\CategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as EXT;
@@ -153,5 +155,44 @@ class BacklogController extends Controller
 
         return array('form' => $form->createView());
     }
+
+    /**
+     * @EXT\Route("/category", name="category")
+     * @EXT\Template
+     */
+    public function categoryAction()
+    {
+        $categories = $this->get('doctrine.orm.entity_manager')
+            ->getRepository('ClarolineBacklogBundle:Category')
+            ->findAll();
+
+        return array('categories' => $categories);
+    }
+
+    /**
+     * @EXT\Route("/category/new", name="create_category")
+     * @EXT\Template
+     */
+    public function categoryFormAction(Request $request)
+    {
+        $form = $this->createForm(new CategoryType(), new Category());
+
+        if ($request->getMethod() === 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $category = new Category();
+                $category->setName($form->get('name')->getData());
+                $em = $this->get('doctrine.orm.entity_manager');
+                $em->persist($category);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('category'));
+            }
+        }
+
+        return array('form' => $form->createView());
+    }
+
 
 }

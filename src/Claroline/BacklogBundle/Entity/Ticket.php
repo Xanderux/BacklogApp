@@ -200,6 +200,23 @@ class Ticket
     }
 
     /**
+     * @param mixed $category
+     */
+    public function setCategory($category)
+    {
+        $this->categories = $category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->categories;
+    }
+
+
+    /**
      * @param mixed $path
      */
     public function setPath($path)

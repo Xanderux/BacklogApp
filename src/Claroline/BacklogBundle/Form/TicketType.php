@@ -35,6 +35,17 @@ class TicketType extends AbstractType
 
                 )
             )
+            ->add(
+                'category',
+                'entity',
+                array(
+                    'class' => 'Claroline\BacklogBundle\Entity\Category',
+                    'property' => 'name',
+                    'multiple' => true,
+                    'query_builder' => function ($repository) { return $repository->createQueryBuilder('p')->orderBy('p.name', 'ASC'); }
+
+                )
+            )
             ->add('save', 'submit');
     }
 

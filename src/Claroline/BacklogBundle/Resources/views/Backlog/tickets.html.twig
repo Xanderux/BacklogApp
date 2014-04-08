@@ -10,6 +10,7 @@
                 <th>Creator</th>
                 <th>Status</th>
                 <th>Version</th>
+                <th>Catégorie(s)</th>
                 <th>Update</th>
 
        </tr>
@@ -21,6 +22,7 @@
                 <td>{{ ticket.getCreator().getUsername() }}</td>
                 <td>{{ ticket.getStatus().getStatusName() }}</td>
                 <td>{{ ticket.getVersion().getVersionName() }}</td>
+                <td>{% for category in ticket.getCategory() %} {{category.getName()}},  {%endfor%}</td>
                 <td>
                     <a href="{{ path('update_ticket', { ticket: ticket.getId() }) }}">
                         Update
