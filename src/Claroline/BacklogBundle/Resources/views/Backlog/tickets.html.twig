@@ -21,7 +21,7 @@
     <tbody>
         {% for ticket in tickets %}
             <tr>
-                <td>{{ ticket.getTitle() }}</td>
+                <td> <a href="{{ path('view_ticket', { ticket: ticket.getId() }) }}">{{ ticket.getTitle() }}</a></td>
                 <td>{{ ticket.getCreator().getUsername() }}</td>
                 <td>{{ ticket.getStatus().getStatusName() }}</td>
                 <td>{{ ticket.getVersion().getVersionName() }}</td>

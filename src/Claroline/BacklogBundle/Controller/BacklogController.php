@@ -23,7 +23,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration as EXT;
 class BacklogController extends Controller
 {
     /**
-     * @EXT\Route("/tickets", name="tickets")
+     * @EXT\Route("/", name="tickets")
      * @EXT\Template
      */
     public function ticketsAction()
@@ -85,6 +85,21 @@ class BacklogController extends Controller
         return array('form' => $form->createView());
     }
 
+    /**
+     * @EXT\Route("/tickets/view/{ticket}", name="view_ticket")
+     * @EXT\Template("ClarolineBacklogBundle:Backlog:ticketView.html.twig")
+     * @EXT\ParamConverter("ticket", class="ClarolineBacklogBundle:Ticket")
+     */
+
+    public function viewTicketAction(Request $request, Ticket $ticket)
+    {
+        $ticket = $this->get('doctrine.orm.entity_manager')
+            ->getRepository('ClarolineBacklogBundle:Ticket')
+            ->find($ticket);
+
+        return array('ticket' => $ticket);
+
+    }
 
     /**
      * @EXT\Route("/status", name="status")

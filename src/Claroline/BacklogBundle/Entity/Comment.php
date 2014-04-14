@@ -32,5 +32,21 @@ class Comment
      *     inversedBy="comments"
      * )
      */
-    private $author;
+    private $ticket;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $comment;
+
+    /**
+     * @ORM\ManyToOne(
+     *     targetEntity="Claroline\BacklogBundle\Entity\User",
+     *     inversedBy="comment"
+     * )
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $creator;
+
+
 }

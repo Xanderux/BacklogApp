@@ -34,4 +34,12 @@ class User extends BaseUser
      * )
      */
     private $tickets;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="Claroline\BacklogBundle\Entity\Comment",
+     *     mappedBy="creator"
+     * )
+     */
+    private $comment;
 }
