@@ -4,4 +4,44 @@
 
 <h1>{{ ticket.getTitle() }}</h1>
 
+<h3>Description :</h3>
+<p>{{ticket.getDescription()}}</p>
+
+<h3> Infos : </h3>
+
+<table class="table table-hover table-bordered">
+<tr><td>Créateur : </td><td> {{ ticket.getCreator().getUsername() }}  </td></tr>
+<tr><td>Status : </td><td> {{ticket.getStatus().getStatusName()}}</td></tr>
+<tr><td>Version : </td><td> {{ticket.getVersion().getVersionName()}}</td></tr>
+<tr><td>Catégorie(s) : </td><td>{{ ticket.getCategories(true)|join(',') }}</td></tr>
+<tr><td>Package(s) : </td><td>{{ ticket.getPackages(true)|join(',') }}</td></tr>
+<tr><td>Role(s) : </td><td>{{ ticket.getRoles(true)|join(',') }}</td></tr>
+<tr><td>Team(s) : </td><td>{{ ticket.getTeams(true)|join(',') }} </td></tr>
+<tr><td>Accepté : </td><td>{% if ticket.getIsValidated() %}
+                                <span class="glyphicon glyphicon-ok"></span>
+                            {%else%}
+                                <span class="glyphicon glyphicon-remove"></span>
+                            {%endif%}
+                        </td></tr>
+<tr><td>Commentaire bloqué : </td><td>  {% if ticket.getIsBlocked() %}
+                                            oui
+                                        {%else%}
+                                            non
+                                        {%endif%}
+                                    </td></tr>
+
+</table>
+
+{% if is_granted("ROLE_ADMIN") or app.user.username == ticket.getCreator().getUsername() %}
+<a href="{{ path('update_ticket', { ticket: ticket.getId() }) }}"><button type="button" class="btn btn-primary">Modifier</button></a>
+{%endif%}
+<h3>Commentaire(s) :</h3>
+{% for comment in ticket.getComments() %}
+    <p>{{comment.getContent()}}</p>
+    <p>Commentaire de {{comment.getCreator()}} rédigé le {{comment.getCreated()|date('d-m-Y H:i:s')}}</p>
+    <hr>
+{%endfor%}
+
+{{ form(form) }}
+
 {% endblock %}

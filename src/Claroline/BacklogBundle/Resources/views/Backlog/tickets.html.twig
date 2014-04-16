@@ -40,7 +40,6 @@
                     Validé
                 </a>
             </th>
-            <th>Modifier</th>
         </tr>
     </thead>
     <tbody>
@@ -60,11 +59,6 @@
                     {% else %}
                         <span class="glyphicon glyphicon-remove"></span>
                     {% endif %}
-                </td>
-                <td>
-                    <a href="{{ path('update_ticket', { ticket: ticket.getId() }) }}">
-                        Modifier
-                    </a>
                 </td>
             </tr>
         {% endfor %}
