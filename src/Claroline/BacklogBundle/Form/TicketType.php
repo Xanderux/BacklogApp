@@ -13,6 +13,7 @@ class TicketType extends AbstractType
         $builder
             ->add('title', 'text', array('max_length' => 80, 'required' => true, 'label' => 'Sujet'))
             ->add('description', 'textarea', array('required' => false, 'label' => 'Description'))
+            ->add('priority', 'number', array('label' => 'Priorité'))
             ->add('time', 'text', array('max_length' => 80, 'required' => false, 'label' => 'Temps'))
             ->add('path', 'text', array('max_length' => 80, 'required' => false, 'label' => 'Chemin'))
             ->add(
@@ -36,7 +37,7 @@ class TicketType extends AbstractType
                 )
             )
             ->add(
-                'category',
+                'categories',
                 'entity',
                 array(
                     'class' => 'Claroline\BacklogBundle\Entity\Category',
@@ -47,7 +48,7 @@ class TicketType extends AbstractType
                 )
             )
             ->add(
-                'package',
+                'packages',
                 'entity',
                 array(
                     'class' => 'Claroline\BacklogBundle\Entity\Package',
@@ -58,7 +59,7 @@ class TicketType extends AbstractType
                 )
             )
             ->add(
-                'role',
+                'roles',
                 'entity',
                 array(
                     'class' => 'Claroline\BacklogBundle\Entity\Role',
@@ -69,7 +70,7 @@ class TicketType extends AbstractType
                 )
             )
             ->add(
-                'team',
+                'teams',
                 'entity',
                 array(
                     'class' => 'Claroline\BacklogBundle\Entity\Team',

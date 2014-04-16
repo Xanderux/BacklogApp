@@ -13,6 +13,7 @@ namespace Claroline\BacklogBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -55,6 +56,12 @@ class Ticket
      * @ORM\Column(type="boolean")
      */
     private $isBlocked = false;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\Range(min = 0, max = 20)
+     */
+    private $priority = 1;
 
     /**
      * @ORM\Column(nullable=true)
@@ -168,6 +175,22 @@ class Ticket
     }
 
     /**
+     * @param $priority
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
      * @param mixed $time
      */
     public function setTime($time)
@@ -202,67 +225,78 @@ class Ticket
     /**
      * @param mixed $category
      */
-    public function setCategory($category)
+    public function addCategory($category)
     {
-        $this->categories = $category;
+        $this->categories->add($category);
     }
 
     /**
+     * @param bool $nameOnly
      * @return mixed
      */
-    public function getCategory()
+    public function getCategories($nameOnly = false)
     {
-        return $this->categories;
+        return $nameOnly ?
+            $this->extractNames($this->categories) :
+            $this->categories;
     }
 
     /**
-     * @param mixed $package
+     * @param Package $package
      */
-    public function setPackage($package)
+    public function addPackage(Package $package)
     {
-        $this->packages = $package;
+        $this->packages->add($package);
     }
 
     /**
+     * @param bool $nameOnly
      * @return mixed
      */
-    public function getPackage()
+    public function getPackages($nameOnly = false)
     {
-        return $this->packages;
+        return $nameOnly ?
+            $this->extractNames($this->packages) :
+            $this->packages;
     }
 
     /**
-     * @param mixed $role
+     * @param Role $role
      */
-    public function setRole($role)
+    public function addRole(Role $role)
     {
-        $this->roles = $role;
+        $this->roles->add($role);
     }
 
     /**
-     * @return mixed
+     * @param bool $nameOnly
+     * @return array|ArrayCollection
      */
-    public function getRole()
+    public function getRoles($nameOnly = false)
     {
-        return $this->roles;
+        return $nameOnly ?
+            $this->extractNames($this->roles) :
+            $this->roles;
     }
 
     /**
-     * @param mixed $team
+     * @param Team $team
      */
-    public function setTeam($team)
+    public function addTeam(Team $team)
     {
-        $this->teams = $team;
+        $this->teams->add($team);
     }
 
     /**
-     * @return mixed
+     * @param bool $nameOnly
+     * @return array|ArrayCollection
      */
-    public function getTeam()
+    public function getTeams($nameOnly = false)
     {
-        return $this->teams;
+        return $nameOnly ?
+            $this->extractNames($this->teams) :
+            $this->teams;
     }
-
 
     /**
      * @param mixed $path
@@ -368,5 +402,16 @@ class Ticket
     public function getCreator()
     {
         return $this->creator;
+    }
+
+    private function extractNames($collection)
+    {
+        $names = array();
+
+        foreach ($collection as $item) {
+            $names[] = $item->getName();
+        }
+
+        return $names;
     }
 }

@@ -25,19 +25,15 @@ class Comment
      */
     private $id;
 
-
     /**
-     * @ORM\ManyToOne(
-     *     targetEntity="Claroline\BacklogBundle\Entity\Ticket",
-     *     inversedBy="comments"
-     * )
+     * @ORM\Column(type="datetime")
      */
-    private $ticket;
+    private $created;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $comment;
+    private $content;
 
     /**
      * @ORM\ManyToOne(
@@ -48,5 +44,75 @@ class Comment
      */
     private $creator;
 
+    /**
+     * @ORM\ManyToOne(
+     *     targetEntity="Claroline\BacklogBundle\Entity\Ticket",
+     *     inversedBy="comments"
+     * )
+     */
+    private $ticket;
 
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param mixed $created
+     */
+    public function setCreated(\DateTime $created)
+    {
+        $this->created = $created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param mixed $creator
+     */
+    public function setCreator(User $creator)
+    {
+        $this->creator = $creator;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreator()
+    {
+        return $this->creator;
+    }
+
+    /**
+     * @param mixed $ticket
+     */
+    public function setTicket(Ticket $ticket)
+    {
+        $this->ticket = $ticket;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTicket()
+    {
+        return $this->ticket;
+    }
 }

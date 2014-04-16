@@ -26,11 +26,16 @@
                 <td>{{ ticket.getCreator().getUsername() }}</td>
                 <td>{{ ticket.getStatus().getStatusName() }}</td>
                 <td>{{ ticket.getVersion().getVersionName() }}</td>
-                <td>{% for category in ticket.getCategory() %} {{category.getName()}},  {%endfor%}</td>
-                <td>{% for package in ticket.getPackage() %} {{package.getName()}},  {%endfor%}</td>
-                <td>{% for role in ticket.getRole() %} {{role.getName()}},  {%endfor%}</td>
-                <td>{% for team in ticket.getTeam() %} {{team.getName()}},  {%endfor%}</td>
-                <td>{% if ticket.getIsValidated() %} <span class="glyphicon glyphicon-ok"></span> {%else%}<span class="glyphicon glyphicon-remove"></span> {%endif%}</td>
+                <td>{{ ticket.getCategories(true)|join(',') }}</td>
+                <td>{{ ticket.getPackages(true)|join(',') }}</td>
+                <td>{{ ticket.getRoles(true)|join(',') }}</td>
+                <td>{{ ticket.getTeams(true)|join(',') }}</td>
+                <td>{% if ticket.getIsValidated() %}
+                        <span class="glyphicon glyphicon-ok"></span>
+                    {% else %}
+                        <span class="glyphicon glyphicon-remove"></span>
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{ path('update_ticket', { ticket: ticket.getId() }) }}">
                         Update
