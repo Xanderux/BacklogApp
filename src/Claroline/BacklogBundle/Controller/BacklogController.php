@@ -20,6 +20,7 @@ use Claroline\BacklogBundle\Form\TeamType;
 use Claroline\BacklogBundle\Form\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as EXT;
 
 class BacklogController extends Controller
@@ -70,6 +71,9 @@ class BacklogController extends Controller
      */
     public function updateTicketAction(Request $request, Ticket $ticket)
     {
+        if ($this->getUser() != $ticket->getCreator() and false === $this->get('security.context')->isGranted('ROLE_ADMIN') ){
+            throw new AccessDeniedException();
+        }
         $form = $this->createForm(new TicketType(), $ticket);
 
         if ($request->getMethod() === 'POST') {
@@ -85,6 +89,7 @@ class BacklogController extends Controller
         }
 
         return array('form' => $form->createView());
+
     }
 
     /**
