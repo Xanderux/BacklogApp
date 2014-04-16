@@ -6,9 +6,11 @@
 
 <p> Pour y accéder connectez-vous : </p>
 
-{% for key, message in app.session.flashbag.all() %}
+{% for key, messages in app.session.flashbag.all() %}
     <div class="alert alert-{{ key }}">
-      {{ message|trans({}, 'FOSUserBundle') }}
+        {% for message in messages %}
+            {{ message|trans({}, 'FOSUserBundle') }}
+        {% endfor %}
     </div>
   {% endfor %}
   {% block fos_user_content %}
