@@ -15,7 +15,6 @@
                 <th>Role(s)</th>
                 <th>Team(s)</th>
                 <th>Validé</th>
-                <th>Update</th>
 
        </tr>
     </thead>
@@ -35,11 +34,6 @@
                     {% else %}
                         <span class="glyphicon glyphicon-remove"></span>
                     {% endif %}
-                </td>
-                <td>
-                    <a href="{{ path('update_ticket', { ticket: ticket.getId() }) }}">
-                        Update
-                    </a>
                 </td>
             </tr>
         {% endfor %}

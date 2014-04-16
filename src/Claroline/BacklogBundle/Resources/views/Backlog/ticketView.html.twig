@@ -31,8 +31,10 @@
                                     </td></tr>
 
 </table>
-<a href="{{ path('update_ticket', { ticket: ticket.getId() }) }}"><button type="button" class="btn btn-primary">Modifier</button></a>
 
+{% if is_granted("ROLE_ADMIN") or app.user.username == ticket.getCreator().getUsername() %}
+<a href="{{ path('update_ticket', { ticket: ticket.getId() }) }}"><button type="button" class="btn btn-primary">Modifier</button></a>
+{%endif%}
 <h3>Commentaire(s) :</h3>
 {% for comment in ticket.getComments() %}
     <p>{{comment.getContent()}}</p>
