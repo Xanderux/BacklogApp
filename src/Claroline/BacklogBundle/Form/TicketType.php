@@ -80,6 +80,8 @@ class TicketType extends AbstractType
                 )
             )
 
+            ->add('isValidated', 'checkbox', array('required' => false, 'label' => 'Validé'))
+            ->add('isBlocked', 'checkbox', array('required' => false, 'label' => 'Fermer les commentaires'))
             ->add('save', 'submit');
     }
 

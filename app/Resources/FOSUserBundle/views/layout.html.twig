@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+<h1> Bienvenue sur le backlog de Claroline Connect</h1>
+
+<p> Pour y accéder connectez-vous : </p>
+
+{% for key, message in app.session.flashbag.all() %}
+    <div class="alert alert-{{ key }}">
+      {{ message|trans({}, 'FOSUserBundle') }}
+    </div>
+  {% endfor %}
+  {% block fos_user_content %}
+  {% endblock fos_user_content %}
+
+{%endblock%}
