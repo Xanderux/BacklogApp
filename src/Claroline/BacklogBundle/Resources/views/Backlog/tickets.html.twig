@@ -5,31 +5,56 @@
 
 <table class="table table-striped">
     <thead>
-       <tr>
-                <th>Title</th>
-                <th>Creator</th>
-                <th>Status</th>
-                <th>Version</th>
-                <th>Catégorie(s)</th>
-                <th>Package(s)</th>
-                <th>Role(s)</th>
-                <th>Team(s)</th>
-                <th>Validé</th>
-                <th>Update</th>
-
-       </tr>
+        <tr>
+            <th>
+                <a href="{{ path('tickets') }}?order=title&direction={{ direction }}">
+                    Titre
+                </a>
+            </th>
+            <th>
+                <a href="{{ path('tickets') }}?order=creator&direction={{ direction }}">
+                    Créateur
+                </a>
+            </th>
+            <th>
+                <a href="{{ path('tickets') }}?order=priority&direction={{ direction }}">
+                   Priorité
+                </a>
+            </th>
+            <th>
+                <a href="{{ path('tickets') }}?order=status&direction={{ direction }}">
+                    Statut
+                </a>
+            </th>
+            <th>
+                <a href="{{ path('tickets') }}?order=version&direction={{ direction }}">
+                    Version
+                </a>
+            </th>
+            <th>Catégorie(s)</th>
+            <th>Package(s)</th>
+            <th>Rôle(s)</th>
+            <th>Équipe(s)</th>
+            <th>
+                <a href="{{ path('tickets') }}?order=isValidated&direction={{ direction }}">
+                    Validé
+                </a>
+            </th>
+            <th>Modifier</th>
+        </tr>
     </thead>
     <tbody>
         {% for ticket in tickets %}
             <tr>
-                <td> <a href="{{ path('view_ticket', { ticket: ticket.getId() }) }}">{{ ticket.getTitle() }}</a></td>
+                <td><a href="{{ path('view_ticket', { ticket: ticket.getId() }) }}">{{ ticket.getTitle() }}</a></td>
                 <td>{{ ticket.getCreator().getUsername() }}</td>
+                <td>{{ ticket.getPriority() }}</td>
                 <td>{{ ticket.getStatus().getStatusName() }}</td>
                 <td>{{ ticket.getVersion().getVersionName() }}</td>
-                <td>{{ ticket.getCategories(true)|join(',') }}</td>
-                <td>{{ ticket.getPackages(true)|join(',') }}</td>
-                <td>{{ ticket.getRoles(true)|join(',') }}</td>
-                <td>{{ ticket.getTeams(true)|join(',') }}</td>
+                <td>{{ ticket.getCategories(true)|join(', ') }}</td>
+                <td>{{ ticket.getPackages(true)|join(', ') }}</td>
+                <td>{{ ticket.getRoles(true)|join(', ') }}</td>
+                <td>{{ ticket.getTeams(true)|join(', ') }}</td>
                 <td>{% if ticket.getIsValidated() %}
                         <span class="glyphicon glyphicon-ok"></span>
                     {% else %}
@@ -38,7 +63,7 @@
                 </td>
                 <td>
                     <a href="{{ path('update_ticket', { ticket: ticket.getId() }) }}">
-                        Update
+                        Modifier
                     </a>
                 </td>
             </tr>

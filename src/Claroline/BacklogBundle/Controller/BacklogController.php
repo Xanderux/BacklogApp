@@ -18,6 +18,7 @@ use Claroline\BacklogBundle\Form\RoleType;
 use Claroline\BacklogBundle\Form\TeamType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as EXT;
 
 class BacklogController extends Controller
@@ -26,13 +27,30 @@ class BacklogController extends Controller
      * @EXT\Route("/", name="tickets")
      * @EXT\Template
      */
-    public function ticketsAction()
+    public function ticketsAction(Request $request)
     {
-        $tickets = $this->get('doctrine.orm.entity_manager')
-            ->getRepository('ClarolineBacklogBundle:Ticket')
-            ->findAll();
+        $qb = $this->get('doctrine.orm.entity_manager')
+            ->createQueryBuilder()
+            ->select('t')
+            ->from('Claroline\BacklogBundle\Entity\Ticket', 't');
 
-        return array('tickets' => $tickets);
+        if ($orderBy = $request->query->get('order')) {
+            $allowedFields = array(
+                'title', 'priority', 'status', 'creator', 'version', 'isValidated'
+            );
+
+            if (!in_array($orderBy, $allowedFields)) {
+                return new Response('Bad request', 400);
+            }
+
+            $direction = $request->query->get('direction') === 'desc' ? 'desc' : 'asc';
+            $qb->orderBy('t.' . $orderBy, strtoupper($direction));
+        }
+
+        return array(
+            'tickets' => $qb->getQuery()->getResult(),
+            'direction' => isset($direction) ? ($direction === 'asc' ? 'desc' : 'asc') : 'asc'
+        );
     }
 
     /**

@@ -9,13 +9,13 @@
 <body>
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 <a href="{{ path('tickets') }}">Liste des tickets</a>
- | <a href="{{ path('status')}}">Liste des status</a>
+ | <a href="{{ path('status')}}">Liste des statuts</a>
  | <a href="{{ path('version')}}">Liste des versions</a>
  | <a href="{{ path('category')}}">Liste des catégories</a>
  | <a href="{{ path('package')}}">Liste des packages</a>
- | <a href="{{ path('role')}}">Liste des roles</a>
+ | <a href="{{ path('role')}}">Liste des rôles</a>
  | <a href="{{ path('team')}}">Liste des équipes</a>
- | <a href="{{ path('fos_user_security_logout')}}">Logout</a>
+ | <a href="{{ path('fos_user_security_logout')}}">Déconnexion</a>
 {% endif %}
 {% block body %}
 {% endblock %}
