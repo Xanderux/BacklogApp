@@ -96,7 +96,7 @@ class Ticket
     /**
      * @ORM\OneToMany(
      *     targetEntity="Claroline\BacklogBundle\Entity\Comment",
-     *     mappedBy="author"
+     *     mappedBy="ticket"
      * )
      */
     private $comments;
@@ -278,6 +278,23 @@ class Ticket
             $this->extractNames($this->roles) :
             $this->roles;
     }
+
+    /**
+     * @param Comment $comment
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments->add($comment);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
 
     /**
      * @param Team $team

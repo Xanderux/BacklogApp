@@ -9,6 +9,7 @@ use Claroline\BacklogBundle\Entity\Category;
 use Claroline\BacklogBundle\Entity\Package;
 use Claroline\BacklogBundle\Entity\Role;
 use Claroline\BacklogBundle\Entity\Team;
+use Claroline\BacklogBundle\Entity\Comment;
 use Claroline\BacklogBundle\Form\TicketType;
 use Claroline\BacklogBundle\Form\StatusType;
 use Claroline\BacklogBundle\Form\VersionType;
@@ -16,6 +17,7 @@ use Claroline\BacklogBundle\Form\CategoryType;
 use Claroline\BacklogBundle\Form\PackageType;
 use Claroline\BacklogBundle\Form\RoleType;
 use Claroline\BacklogBundle\Form\TeamType;
+use Claroline\BacklogBundle\Form\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as EXT;
@@ -97,7 +99,29 @@ class BacklogController extends Controller
             ->getRepository('ClarolineBacklogBundle:Ticket')
             ->find($ticket);
 
-        return array('ticket' => $ticket);
+        $form = $this->createForm(new CommentType(), new Comment());
+
+        if ($request->getMethod() === 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $comment= new Comment();
+                $comment->setContent($form->get('content')->getData());
+                $comment->setCreator($this->getUser());
+                $comment->setCreated(new \DateTime());
+                $em = $this->get('doctrine.orm.entity_manager');
+                $ticket->addComment($comment);
+                $comment->setTicket($ticket);
+                $em->persist($comment);
+                $em->persist($ticket);
+                $em->flush();
+
+                //return $this->redirect($this->generateUrl(''));
+                return $this->redirect($this->generateUrl('view_ticket', array('ticket'=>$ticket->getId())));
+            }
+        }
+
+        return array('ticket' => $ticket, 'form' => $form->createView());
 
     }
 
