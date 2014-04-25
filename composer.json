@@ -19,7 +19,8 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "pagerfanta/pagerfanta": "dev-master",
         "doctrine/migrations": "dev-master",
-        "doctrine/doctrine-migrations-bundle": "dev-master"
+        "doctrine/doctrine-migrations-bundle": "dev-master",
+        "jms/di-extra-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

@@ -2,10 +2,12 @@
 
 {% block body %}
 
+<div style="margin:auto; width:85vw">
+
 <h1>{{ ticket.getTitle() }}</h1>
 
 <h3>Description :</h3>
-<p>{{ticket.getDescription()}}</p>
+<p>{{ticket.getDescription()|raw}}</p>
 
 <h3> Infos : </h3>
 
@@ -43,5 +45,7 @@
 {%endfor%}
 
 {{ form(form) }}
+
+</div>
 
 {% endblock %}

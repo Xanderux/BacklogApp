@@ -12,7 +12,7 @@ class TicketType extends AbstractType
     {
         $builder
             ->add('title', 'text', array('max_length' => 80, 'required' => true, 'label' => 'Sujet'))
-            ->add('description', 'textarea', array('required' => false, 'label' => 'Description'))
+            ->add('description', 'tinymce', array('required' => false, 'label' => 'Description'))
             ->add('priority', 'number', array('label' => 'Priorité'))
             ->add('time', 'text', array('max_length' => 80, 'required' => false, 'label' => 'Temps'))
             ->add('path', 'text', array('max_length' => 80, 'required' => false, 'label' => 'Chemin'))
